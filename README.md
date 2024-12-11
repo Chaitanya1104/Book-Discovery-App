@@ -1,4 +1,4 @@
-# discoveryapp
+# Book Discovery App
 
 A new Flutter project.
 

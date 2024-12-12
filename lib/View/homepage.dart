@@ -15,6 +15,7 @@ class _BookScreenState extends State<BookScreen> {
   bool _loading = false;
   late ScrollController _scrollController;
   TextEditingController textEditingController = TextEditingController();
+  String? currentQuery;
 
   @override
   void initState() {
@@ -31,9 +32,14 @@ class _BookScreenState extends State<BookScreen> {
   }
 
   Future<void> fetchBooks({bool isPagination = false, String? query}) async {
-    String url = query != null && query.isNotEmpty
-        ? "https://gutendex.com/books/?search=$query"
-        : nextPageUrl ?? "";
+    // Handle URL based on query or pagination
+    String url;
+    if (query != null && query.isNotEmpty) {
+      url = "https://gutendex.com/books/?search=$query";
+      currentQuery = query;
+    } else {
+      url = nextPageUrl ?? "";
+    }
 
     if (url.isEmpty || (isPagination && nextPageUrl == null)) return;
 
@@ -42,8 +48,7 @@ class _BookScreenState extends State<BookScreen> {
         _isFetchingMore = true;
       } else {
         _loading = true;
-        books.clear();
-        nextPageUrl = "https://gutendex.com/books/";
+        if (query != null) books.clear(); // Clear books only on a new query
       }
     });
 
@@ -80,21 +85,26 @@ class _BookScreenState extends State<BookScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black, // Set the background color to black
+      backgroundColor: Colors.black,
       body: Stack(
         children: [
           RefreshIndicator(
             onRefresh: () async {
-              // Reset the books and fetch the initial data
+              textEditingController.clear();
+              currentQuery = null;
+              nextPageUrl = "https://gutendex.com/books/"; // Reset to initial URL
+              setState(() {
+                books.clear();
+              });
               await fetchBooks();
             },
             child: SingleChildScrollView(
               controller: _scrollController,
-              physics: const AlwaysScrollableScrollPhysics(), // Allow scrolling even if the list isn't full
+              physics: const AlwaysScrollableScrollPhysics(),
               child: Column(
                 children: [
                   Container(
-                    color: Colors.black, // Ensure the container's background matches
+                    color: Colors.black,
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,7 +172,7 @@ class _BookScreenState extends State<BookScreen> {
                   _loading && books.isEmpty
                       ? const Center(
                     child: CircularProgressIndicator(
-                      color: Colors.white, // Match with the black background
+                      color: Colors.white,
                     ),
                   )
                       : books.isEmpty
@@ -173,13 +183,14 @@ class _BookScreenState extends State<BookScreen> {
                     ),
                   )
                       : Container(
-                    color: Colors.black, // Set the container's background color to black
+                    color: Colors.black,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: GridView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                        gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
                           maxCrossAxisExtent: 200,
                           childAspectRatio: 0.7,
                           crossAxisSpacing: 10,
@@ -216,7 +227,7 @@ class _BookScreenState extends State<BookScreen> {
                     const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: CircularProgressIndicator(
-                        color: Colors.white, // Match with the black background
+                        color: Colors.white,
                       ),
                     ),
                 ],

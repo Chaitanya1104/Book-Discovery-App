@@ -37,17 +37,17 @@ Below are some screenshots of the app:
 <div style="display: flex; justify-content: space-between; gap: 20px;">
 
     <div style="text-align: center;">
-        <img src="assets/screenshots/home_screen.png" alt="Home Screen" width="250"/>
+        <img src="assets/home_screen.png" alt="Home Screen" width="250"/>
         <p>Home Screen</p>
     </div>
 
     <div style="text-align: center;">
-        <img src="assets/screenshots/search_screen.png" alt="Search Screen" width="250"/>
+        <img src="assets/search_screen.png" alt="Search Screen" width="250"/>
         <p>Searching</p>
     </div>
 
     <div style="text-align: center;">
-        <img src="assets/screenshots/book_detail_screen.png" alt="Book Detail Screen" width="250"/>
+        <img src="assets/book_detail_screen.png" alt="Book Detail Screen" width="250"/>
         <p>Book Detail Screen</p>
     </div>
 

@@ -34,7 +34,7 @@ To run the app locally, follow the steps below:
 
 Below are some screenshots of the app:
 
-<div style="display: flex; justify-content: space-around; gap: 20px;">
+<div style="display: flex; justify-content: space-between; gap: 20px;">
 
   <div style="text-align: center;">
     <img src="assets/screenshots/home_screen.png" alt="Home Screen" width="250"/>

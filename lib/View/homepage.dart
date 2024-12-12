@@ -80,143 +80,147 @@ class _BookScreenState extends State<BookScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black, // Set the background color to black
       body: Stack(
         children: [
-          SingleChildScrollView(
-            controller: _scrollController,
-            child: Column(
-              children: [
-                Container(
-                  color: const Color(0xff050709),
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      const SizedBox(height: 50),
-                      const Center(
-                        child: Text(
-                          "Book Discovery",
+          RefreshIndicator(
+            onRefresh: () async {
+              // Reset the books and fetch the initial data
+              await fetchBooks();
+            },
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              physics: const AlwaysScrollableScrollPhysics(), // Allow scrolling even if the list isn't full
+              child: Column(
+                children: [
+                  Container(
+                    color: Colors.black, // Ensure the container's background matches
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        const SizedBox(height: 50),
+                        const Center(
+                          child: Text(
+                            "Book Discovery",
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        const Text(
+                          "Explore through our list of books and uncover your next great read.",
                           style: TextStyle(
-                            fontSize: 30,
+                            fontSize: 18,
                             fontWeight: FontWeight.w500,
                             color: Colors.white,
                           ),
+                          textAlign: TextAlign.center,
                         ),
-                      ),
-                      const SizedBox(height: 10),
-                      const Text(
-                        "Explore through our list of books and uncover your next great read.",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 20),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextField(
-                              controller: textEditingController,
-                              decoration: const InputDecoration(
-                                hintText: "Search for books...",
-                                hintStyle:
-                                TextStyle(fontSize: 16, color: Colors.white54),
-                                filled: true,
-                                fillColor: Color(0xff1b1b1b),
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(8),
+                        const SizedBox(height: 20),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                controller: textEditingController,
+                                decoration: const InputDecoration(
+                                  hintText: "Search for books...",
+                                  hintStyle: TextStyle(fontSize: 16, color: Colors.white54),
+                                  filled: true,
+                                  fillColor: Color(0xff1b1b1b),
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(8),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              style: const TextStyle(
-                                fontSize: 16,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          ElevatedButton(
-                            onPressed: () {
-                              if (textEditingController.text.isNotEmpty) {
-                                fetchBooks(query: textEditingController.text);
-                              }
-                            },
-                            child: const Text("Search"),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                    ],
-                  ),
-                ),
-                _loading && books.isEmpty
-                    ? const Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.black,
-                  ),
-                )
-                    : books.isEmpty
-                    ? const Center(
-                  child: Text(
-                    "No books found!",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                )
-                    : Container(
-                  color: const Color(0xff050709),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                      const SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: 200,
-                        childAspectRatio: 0.7,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                      ),
-                      itemCount: books.length,
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DetailPage(
-                                  id: books[index]['id'].toString(),
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
                                 ),
                               ),
-                            );
-                          },
-                          child: BookTile(
-                            title:
-                            books[index]['title'] ?? "No Title",
-                            imgUrl: books[index]['formats']
-                            ?['image/jpeg'] ??
-                                "https://via.placeholder.com/150",
-                            author: books[index]['authors'] != null &&
-                                books[index]['authors'].isNotEmpty
-                                ? books[index]['authors'][0]['name']
-                                : "Unknown Author",
-                          ),
-                        );
-                      },
+                            ),
+                            const SizedBox(width: 8),
+                            ElevatedButton(
+                              onPressed: () {
+                                if (textEditingController.text.isNotEmpty) {
+                                  fetchBooks(query: textEditingController.text);
+                                }
+                              },
+                              child: const Text("Search"),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                      ],
                     ),
                   ),
-                ),
-                if (_isFetchingMore)
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
+                  _loading && books.isEmpty
+                      ? const Center(
                     child: CircularProgressIndicator(
-                      color: Colors.black,
+                      color: Colors.white, // Match with the black background
+                    ),
+                  )
+                      : books.isEmpty
+                      ? const Center(
+                    child: Text(
+                      "No books found!",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  )
+                      : Container(
+                    color: Colors.black, // Set the container's background color to black
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 200,
+                          childAspectRatio: 0.7,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                        ),
+                        itemCount: books.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetailPage(
+                                    id: books[index]['id'].toString(),
+                                  ),
+                                ),
+                              );
+                            },
+                            child: BookTile(
+                              title: books[index]['title'] ?? "No Title",
+                              imgUrl: books[index]['formats']?['image/jpeg'] ??
+                                  "https://via.placeholder.com/150",
+                              author: books[index]['authors'] != null &&
+                                  books[index]['authors'].isNotEmpty
+                                  ? books[index]['authors'][0]['name']
+                                  : "Unknown Author",
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
-              ],
+                  if (_isFetchingMore)
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: CircularProgressIndicator(
+                        color: Colors.white, // Match with the black background
+                      ),
+                    ),
+                ],
+              ),
             ),
           ),
         ],

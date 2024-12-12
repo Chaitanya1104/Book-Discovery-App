@@ -34,6 +34,6 @@ To run the app locally, follow the steps below:
 
 Below are some screenshots of the app:
 
-![Home Screen](assets/screenshots/home_screen.png)
-![Search Screen](assets/screenshots/search_screen.png)
-![Book Detail Screen](assets/screenshots/book_detail_screen.png)
+![Home Screen](assets/home_screen.png)
+![Search Screen](assets/search_screen.png)
+![Book Detail Screen](assets/book_detail_screen.png)

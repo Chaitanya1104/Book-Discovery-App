@@ -1,16 +1,39 @@
 # Book Discovery App
 
-A new Flutter project.
+
+The **Book Discovery App** is a Flutter-based mobile application designed to allow users to discover and search through a collection of books. The app fetches data from the [Gutendex API](https://gutendex.com/), a free API that provides access to thousands of books in the public domain. Users can explore books, search for specific titles or authors, and view detailed information about each book. The app also supports pagination to load more books as users scroll down.
+
+## Features
+
+- **Book Discovery**: Browse a vast collection of public domain books.
+- **Search Functionality**: Search books by title, author, or other keywords. The search results are dynamically fetched as the user types or submits a query.
+- **Pagination**: The app supports infinite scrolling by fetching more books as the user reaches the end of the current list.
+- **Detailed View**: Tap on a book to view detailed information about it, including its title, author, and a preview image of the book cover.
+
+## Technologies Used
+
+- **Flutter**: Framework used for building the mobile app.
+- **HTTP**: Used for making network requests to fetch book data from the Gutendex API.
+- **JSON**: Data from the API is parsed using JSON.
+
 
 ## Getting Started
 
 This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+To run the app locally, follow the steps below:
+1. Install Flutter on your system.
+2. Clone this repository:
+   ```bash
+   git clone https://github.com/Chaitanya1104/Book-Discovery-App.git
+   cd <project-directory>
+3. Install dependencies by clicking pub get in the pubsec.yaml.
+4. Run the app by clicking main.dart file.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Snapshots
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Below are some screenshots of the app:
+
+![Home Screen](assets/screenshots/home_screen.png)
+![Search Screen](assets/screenshots/search_screen.png)
+![Book Detail Screen](assets/screenshots/book_detail_screen.png)

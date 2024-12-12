@@ -26,7 +26,7 @@ To run the app locally, follow the steps below:
 2. Clone this repository:
    ```bash
    git clone https://github.com/Chaitanya1104/Book-Discovery-App.git
-   cd <project-directory>
+   cd Book-Discovery-App
 3. Install dependencies by clicking pub get in the pubsec.yaml.
 4. Run the app by clicking main.dart file.
 
@@ -37,17 +37,17 @@ Below are some screenshots of the app:
 <div style="display: flex; justify-content: space-between; gap: 20px;">
 
     <div style="text-align: center;">
-        <img src="assets/home_screen.png" alt="Home Screen" width="250"/>
+        <img src="assets/screenshots/home_screen.png" alt="Home Screen" width="250"/>
         <p>Home Screen</p>
     </div>
 
     <div style="text-align: center;">
-        <img src="assets/search_screen.png" alt="Search Screen" width="250"/>
+        <img src="assets/screenshots/search_screen.png" alt="Search Screen" width="250"/>
         <p>Searching</p>
     </div>
 
     <div style="text-align: center;">
-        <img src="assets/book_detail_screen.png" alt="Book Detail Screen" width="250"/>
+        <img src="assets/screenshots/book_detail_screen.png" alt="Book Detail Screen" width="250"/>
         <p>Book Detail Screen</p>
     </div>
 

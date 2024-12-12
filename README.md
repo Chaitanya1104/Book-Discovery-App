@@ -34,21 +34,24 @@ To run the app locally, follow the steps below:
 
 Below are some screenshots of the app:
 
-<div style="display: flex; justify-content: space-between; gap: 20px;">
+<div style="display: flex; gap: 20px; justify-content: center; align-items: center;">
 
-  <div style="text-align: center;">
+  <!-- Container for Image 1 -->
+  <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
     <img src="assets/home_screen.png" alt="Home Screen" width="250"/>
-    <p>Home Screen</p>
+    <div>Home Screen</div>
   </div>
 
-  <div style="text-align: center;">
+  <!-- Container for Image 2 -->
+  <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
     <img src="assets/search_screen.png" alt="Search Screen" width="250"/>
-    <p>Searching</p>
+    <div>Searching</div>
   </div>
 
-  <div style="text-align: center;">
+  <!-- Container for Image 3 -->
+  <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
     <img src="assets/book_detail_screen.png" alt="Book Detail Screen" width="250"/>
-    <p>Book Detail Screen</p>
+    <div>Book Detail Screen</div>
   </div>
 
 </div>
